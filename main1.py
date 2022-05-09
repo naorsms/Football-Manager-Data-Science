@@ -1,7 +1,7 @@
 from selenium import webdriver
 import time
 from selenium.webdriver.common.keys import Keys
-import datetime
+#import datetime
 import test
 import pandas as pd
 
@@ -86,24 +86,7 @@ while (i <= 1386):
                 month = full_birthdate.split("-")[1]
                 month = datetime.datetime.strptime(month, "%b").month
                 birthdayTemp = month
-                clubTemp = driver.execute_script(
-                    "return document.getElementsByClassName('large-4 medium-6 columns')[1].querySelectorAll('tbody')["
-                    "0].rows[1].cells[1].innerText;")
-                game_valueTemp = driver.execute_script(
-                    "return document.getElementsByClassName('large-4 medium-6 columns')[1].querySelectorAll('tbody')["
-                    "0].rows[3].cells[1].innerText;")
-                wageTemp = driver.execute_script(
-                    "return document.getElementsByClassName('large-4 medium-6 columns')[1].querySelectorAll('tbody')["
-                    "0].rows[4].cells[1].innerText;")
-                footTemp = driver.execute_script(
-                    "return document.getElementsByClassName('large-5 medium-6 small-12 columns')[0].querySelectorAll("
-                    "'tbody')[0].rows[2].cells[1].innerText;")
-                heightTemp = driver.execute_script(
-                    "return document.getElementsByClassName('large-5 medium-6 small-12 columns')[0].querySelectorAll("
-                    "'tbody')[0].rows[3].cells[1].innerText;")
-                game_ratingTemp = driver.execute_script(
-                    "return document.getElementsByClassName('large-7 medium-6 small-12 columns')[0].querySelectorAll("
-                    "'tbody')[0].rows[1].cells[0].innerText;")
+
                 player_arrTemp = player
                 astrolog.append(test.astro(int(day), month))
                 age.append(ageTemp)
@@ -136,7 +119,7 @@ while (i <= 1386):
                     print("{} was not found at FMscout 21 searching at transfer-market...".format(player))
                     transferMarket_url = "https://www.transfermarkt.com/"
                     driver = webdriver.Chrome(options=option)
-                    driver.get(transferMarket_url)
+                    driver.get("https://www.transfermarkt.com/")
                     element = driver.find_element_by_class_name("header-suche")
                     element.send_keys(player, Keys.ENTER)
                     player_url = driver.execute_script(
@@ -145,6 +128,8 @@ while (i <= 1386):
                         "1].querySelector('a').href")
                     driver.get(player_url)
                     time.sleep(3)
+                    lst2 = {"age": (3, 1), "full_birthday": (1, 1),"club": (9, 1),"foot":(7, 1), "height": (4, 1)}
+                    keys = list(lst.keys())
                     # the command below is to check if there is missing data in the transfer market or not
                     driver.execute_script(
                         "return document.getElementsByClassName('auflistung')[2].querySelector('tbody').rows["
